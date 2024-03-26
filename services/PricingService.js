@@ -1,5 +1,7 @@
 
-const { Pricing, Organization, Item } = require('../models');
+const { Pricing, Item } = require('../models/Items');
+const Organization = require('../models/Organization');
+
 
 async function calculatePrice(zone, organizationId, totalDistance, itemType) {
     try {
