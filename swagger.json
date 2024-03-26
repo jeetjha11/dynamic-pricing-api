@@ -1,0 +1,96 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Food Delivery Pricing API",
+        "description": "API for calculating delivery costs based on various factors",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://your-api-domain.com"
+        }
+    ],
+    "paths": {
+        "/calculate-price": {
+            "post": {
+                "summary": "Calculate delivery price",
+                "description": "Endpoint to calculate the total price for delivering food items",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PricingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PricingResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PricingRequest": {
+                "type": "object",
+                "properties": {
+                    "zone": {
+                        "type": "string"
+                    },
+                    "organization_id": {
+                        "type": "string"
+                    },
+                    "total_distance": {
+                        "type": "number"
+                    },
+                    "item_type": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "zone",
+                    "organization_id",
+                    "total_distance",
+                    "item_type"
+                ]
+            },
+            "PricingResponse": {
+                "type": "object",
+                "properties": {
+                    "total_price": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
